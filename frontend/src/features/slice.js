@@ -1,19 +1,19 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState={
-    user:null,
+    popupVisible:false,
 }
 
 export const slice=createSlice({
-    name:'EDU',
+    name:'D-ARK',
     initialState,
     reducers:{
-        setUser(state,action){
-            state.user=action.payload;
+        setPopupVisible(state,action){
+            state.popupVisible=!state.popupVisible;
         }
     }
 })
 
-export const {setUser}=slice.actions;
+export const {setPopupVisible}=slice.actions;
 
 export default slice.reducer
