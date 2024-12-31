@@ -126,6 +126,18 @@ class Lobby extends Phaser.Scene {
             frameRate: 20,
             repeat: 0
         });
+
+        this.input.keyboard.on('keydown-F', () => {
+            if (this.distanceBwCP< 30 && !this.chestOpened) {
+                this.instructionText.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position above the chest
+                this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position behind the text
+                this.openChest(this.chest);
+            }else if(this.distBwMP<50){
+                this.instructionText.setPosition(this.market.x, this.market.y - 50).setVisible(false); // Position above the chest
+                this.instructionBackground.setPosition(this.market.x, this.market.y - 50).setVisible(false); // Position behind the text
+                this.togglePopup(); 
+            }
+        });
     }
 
     togglePopup () {
@@ -189,46 +201,32 @@ class Lobby extends Phaser.Scene {
         this.cameras.main.setScroll(this.cameras.main.scrollX + normalizedDirX * speed * this.game.loop.delta / 1000,
             this.cameras.main.scrollY + normalizedDirY * speed * this.game.loop.delta / 1000);
 
-        const distanceBwCP= Phaser.Math.Distance.Between(
+        this.distanceBwCP= Phaser.Math.Distance.Between(
             this.player.x,
             this.player.y,
             this.chest.x,
             this.chest.y
         );
-
-        // Highlight if player is near
-        if (distanceBwCP< 30 && !this.chestOpened) {
-            this.instructionText.setPosition(this.chest.x, this.chest.y - 50).setVisible(true); // Position above the chest
-            this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(true); // Position behind the text
-            this.input.keyboard.on('keydown-F', () => {
-                this.instructionText.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position above the chest
-                this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position behind the text
-                this.openChest(this.chest);
-            });
-        } else {
-            this.instructionText.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position above the chest
-            this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position behind the text
-        }
-
-        const distBwMP=Phaser.Math.Distance.Between(
+        this.distBwMP=Phaser.Math.Distance.Between(
             this.player.x,
             this.player.y,
             this.market.x,
             this.market.y
         );
 
-        if (distBwMP< 50) {
+        // Highlight if player is near
+        if (this.distanceBwCP< 30) {
+            this.instructionText.setPosition(this.chest.x, this.chest.y - 50).setVisible(true); // Position above the chest
+            this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(true); // Position behind the text
+            
+        }else if (this.distBwMP< 50) {
             this.instructionText.setPosition(this.market.x, this.market.y - 50).setVisible(true); // Position above the chest
             this.instructionBackground.setPosition(this.market.x, this.market.y - 50).setVisible(true); // Position behind the text
-            this.input.keyboard.on('keydown-F', () => {
-                this.instructionText.setPosition(this.market.x, this.market.y - 50).setVisible(false); // Position above the chest
-                this.instructionBackground.setPosition(this.market.x, this.market.y - 50).setVisible(false); // Position behind the text
-                this.togglePopup(); 
-            });
         } else {
-            this.instructionText.setVisible(false); // Position above the chest
-            this.instructionBackground.setVisible(false); // Position behind the text
+            this.instructionText.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position above the chest
+            this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position behind the text
         }
+
     }
 }
 

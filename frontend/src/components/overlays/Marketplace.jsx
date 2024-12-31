@@ -4,7 +4,28 @@ function Marketplace() {
 
     const [selectedItems, setSelectedItems] = useState([]);
 
-  
+    const items=[
+      {
+      name:"sword",
+      url:"/sword.png",
+      price:100
+      },
+      {
+        name:"bow",
+        url:"/bow.png",
+        price:200
+      }
+      ,
+      {
+        name:"arrow",
+        url:"arrow.png",
+        price: 50
+      },
+      {
+        name:"axe",
+        url:"/axe.png",
+        price:300
+      }];
   
     const handleItemClick = (e) => {
       setSelectedItems((prev) =>
@@ -12,12 +33,20 @@ function Marketplace() {
           ? prev.filter((id) => id !== e.target.id)
           : [...prev, e.target.id]
       );
-      e.target.className+="added"
+      console.log(selectedItems)
+      e.target.classList.toggle("added")
     };
   
     const handleButtonClick = () => {
+
+      
+
         alert(`Added ${selectedItems.length} items to inventory!`);
+        selectedItems.forEach(selectedItem=>{
+          document.getElementById(selectedItem).classList.toggle("added");
+        })
         setSelectedItems([]); // Reset after purchase
+
     };
   
     return (
@@ -25,10 +54,12 @@ function Marketplace() {
   
           <div className="popup">
             <div className="items-grid">
-              <div id='item1' onClick={(e)=>handleItemClick(e)}></div>
-              <div id='item2' onClick={(e)=>handleItemClick(e)}></div>
-              <div id='item3' onClick={(e)=>handleItemClick(e)}></div>
-              <div id='item4' onClick={(e)=>handleItemClick(e)}></div>
+              {items.map((item,idx)=>(
+                <div key={idx} onClick={(e)=>handleItemClick(e)}>
+                  <img src={item.url} id={item.name} className='items' height={50}/>
+                  <h6>{item.name}<br/>{item.price}</h6>
+                </div>
+              ))}
             </div>
             <div className="button-container">
               <button className="toggle-button" onClick={handleButtonClick} >

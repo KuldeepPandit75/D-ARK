@@ -36,6 +36,10 @@
     gap: 5px;
     width: 100%;
   }
+
+  .items-grid div{
+    
+  }
   
   .item {
     width: 16px;
@@ -67,7 +71,7 @@
     background-color: #555;
   }
   
-  #item1{
+  /* #item1{
     height:60px;
     width:60px;
     background-image:url("/sword.png");
@@ -97,7 +101,7 @@
     background-image:url("/axe.png");
     background-repeat: no-repeat;
     background-size: cover;
-  }
+  } */
 
   .added{
     filter: brightness(50%);
