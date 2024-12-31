@@ -28,7 +28,10 @@ class Lobby extends Phaser.Scene {
             frameWidth: 16
         });
         this.load.image('Outdoor_Decor', '/Cute_Fantasy/Outdoor decoration/Outdoor_Decor.png');
-        this.load.image('Boat', '/Cute_Fantasy/Outdoor decoration/Boat.png');
+        this.load.spritesheet('Boat', '/Cute_Fantasy/Outdoor decoration/Boat.png',{
+            frameWidth:64,
+            frameHeight:32
+        });
         this.load.image('Big_Fruit_Tree', '/Cute_Fantasy/Trees/Big_Fruit_Tree.png');
         this.load.image('Oak_Tree', '/Cute_Fantasy/Trees/Oak_Tree.png');
         this.load.image('Birch_Tree', '/Cute_Fantasy/Trees/Birch_Tree.png');
@@ -50,8 +53,7 @@ class Lobby extends Phaser.Scene {
             map.addTilesetImage('Water_Tile_1', 'Water_Tile_1'),
             map.addTilesetImage('House_Abandoned_2_2', 'House_Abandoned_2_2'),
             map.addTilesetImage('House_Abandoned_3_6', 'House_Abandoned_3_6'),
-            map.addTilesetImage('Outdoor_Decor', 'Outdoor_Decor'),
-            map.addTilesetImage('Boat', 'Boat'),
+            map.addTilesetImage('Outdoor_Decor', 'Outdoor_Decor'), 
             map.addTilesetImage('Big_Fruit_Tree', 'Big_Fruit_Tree'),
             map.addTilesetImage('Oak_Tree', 'Oak_Tree'),
             map.addTilesetImage('Birch_Tree', 'Birch_Tree'),
@@ -91,6 +93,9 @@ class Lobby extends Phaser.Scene {
 
         //create Market
         this.market=this.physics.add.sprite(160,150,'market',0).setInteractive();
+
+        //create boat
+        this.boat=this.physics.add.sprite(1580,850,'Boat',0).setInteractive();
 
         // Create text box for instructions
         this.instructionText = this.add.text(0, 0, 'Press F to Interact', { fontSize: '16px', fill: '#fff' }).setOrigin(0.5, 0.5).setVisible(false);
