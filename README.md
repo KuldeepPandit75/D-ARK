@@ -1,4 +1,4 @@
-# D-ARK 🕉️
+# D-ARK 
 
 ## Technologies Used
 
