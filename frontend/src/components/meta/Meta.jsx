@@ -11,6 +11,7 @@ import { setUser } from '../../features/slice.js';
 
 function Meta() {
   const popupVisible=useSelector(state=>state.popupVisible);
+  const refetch=useSelector(state=>state.refetch)
   const dispatch=useDispatch();
 
   const account={
@@ -24,13 +25,13 @@ function Meta() {
         const response=await API.getUserInfo(account);
         console.log("aaaaaaaaaaa",response);
         dispatch(setUser(response.data));
-        localStorage.setItem("userData",JSON.stringify(response))
+        // localStorage.setItem("userData",JSON.stringify(response))
       } catch (error) {
         console.error("error fetching data:",error)
       }
     }
     fetchData();
-  },[])
+  },[refetch])
 
 
   return (

@@ -30,4 +30,7 @@ export const API_NOTIFICATION_MESSAGES = {
 export const SERVICE_CALLS={
     updateUserInfo: {url: "/update", method:"POST"},
     getUserInfo: {url: "/get", method:"POST"},
+    buyItems: {url:"/market/buy",method:"POST"},
+    addStock: {url:"/market/add",method:"POST"},
+    getStock: {url:"/market/stock",method:"POST"},
 }

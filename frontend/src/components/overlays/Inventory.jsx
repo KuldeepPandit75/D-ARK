@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function Inventory() {
   const [selectedBox, setSelectedBox] = useState(0); // Track the selected box (0-8 for 9 boxes)
 
-  let items=[];
+  let data=useSelector(state=>state.user);
+  const [items,setItems]=useState([]);
 
   // Handle key presses for selecting inventory boxes
   useEffect(() => {
@@ -19,6 +21,10 @@ function Inventory() {
       window.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
+
+  useEffect(()=>{
+    setItems(data ? data.items:[]);
+  },[data])
 
   return (
     <div style={{
@@ -36,14 +42,14 @@ function Inventory() {
           width: '60px',
           height: '60px',
           border: '2px solid black',
-          backgroundColor: selectedBox === index ? 'lightblue' : 'white',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           margin: '0 5px',
+          filter: selectedBox===index?'brightness(50%)':''
         }}>
           {items[index] ? (
-            <img src={items[index].image} alt={items[index].name} style={{ width: '40px', height: '40px' }} />
+            <img src={items[index].url} alt={items[index].name} style={{ width: '40px', height: '40px' }} />
           ) : null}
         </div>
       ))}

@@ -12,7 +12,7 @@ const UserSchema= new mongoose.Schema({
         required:true
     },
     items:{
-        type:Object,
+        type:Array,
         required:true
     }
 })

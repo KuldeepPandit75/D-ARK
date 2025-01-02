@@ -3,6 +3,10 @@
     margin:0;
 }
 
+body{
+  overflow:hidden;
+}
+
 .marketplace {
     font-family: Arial, sans-serif;
     text-align: center;

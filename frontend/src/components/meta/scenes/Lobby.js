@@ -138,15 +138,17 @@ class Lobby extends Phaser.Scene {
                 this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position behind the text
                 this.openChest(this.chest);
             }else if(this.distBwMP<50){
-                this.instructionText.setPosition(this.market.x, this.market.y - 50).setVisible(false); // Position above the chest
-                this.instructionBackground.setPosition(this.market.x, this.market.y - 50).setVisible(false); // Position behind the text
-                this.togglePopup(); 
+                this.togglePopup(true); 
+            }else if(this.distBwBP<80){
+                this.scene.start('Arena')
+            }else{
+                this.scene.start('Arena')
             }
         });
     }
 
-    togglePopup () {
-        store.dispatch(setPopupVisible());
+    togglePopup (val) {
+        store.dispatch(setPopupVisible(val));
     } ;
 
 
@@ -155,8 +157,6 @@ class Lobby extends Phaser.Scene {
         this.chestOpened = true; // Set the flag to true
         // Logic to open the chest (e.g., give items, play animation)
         console.log('Chest opened!');
-        this.instructionText.setVisible(false); // Hide instruction text
-        this.instructionBackground.setVisible(false); // Hide background
         this.chest.anims.play("openChest", true); // Play chest opening animation
     }
 
@@ -218,6 +218,12 @@ class Lobby extends Phaser.Scene {
             this.market.x,
             this.market.y
         );
+        this.distBwBP=Phaser.Math.Distance.Between(
+            this.player.x,
+            this.player.y,
+            this.boat.x,
+            this.boat.y
+        );
 
         // Highlight if player is near
         if (this.distanceBwCP< 30) {
@@ -227,9 +233,13 @@ class Lobby extends Phaser.Scene {
         }else if (this.distBwMP< 50) {
             this.instructionText.setPosition(this.market.x, this.market.y - 50).setVisible(true); // Position above the chest
             this.instructionBackground.setPosition(this.market.x, this.market.y - 50).setVisible(true); // Position behind the text
-        } else {
-            this.instructionText.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position above the chest
-            this.instructionBackground.setPosition(this.chest.x, this.chest.y - 50).setVisible(false); // Position behind the text
+        } else if(this.distBwBP<80){
+            this.instructionText.setPosition(this.boat.x, this.boat.y - 50).setVisible(true); // Position above the chest
+            this.instructionBackground.setPosition(this.boat.x, this.boat.y - 50).setVisible(true); // Position behind the text
+        }else {
+            this.instructionText.setVisible(false); // Position above the chest
+            this.instructionBackground.setVisible(false); // Position behind the text
+            this.togglePopup(false);
         }
 
     }

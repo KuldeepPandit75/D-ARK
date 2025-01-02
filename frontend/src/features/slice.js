@@ -3,6 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState={
     popupVisible:false,
     user:null,
+    refetch:false
 }
 
 export const slice=createSlice({
@@ -10,7 +11,10 @@ export const slice=createSlice({
     initialState,
     reducers:{
         setPopupVisible(state,action){
-            state.popupVisible=!state.popupVisible;
+            state.popupVisible=action.payload;
+        },
+        reFetchData(state,action){
+            state.refetch=!state.refetch;
         },
         setUser(state,action){
             state.user=action.payload;
@@ -18,6 +22,6 @@ export const slice=createSlice({
     }
 })
 
-export const {setPopupVisible,setUser}=slice.actions;
+export const {setPopupVisible,setUser,reFetchData}=slice.actions;
 
 export default slice.reducer

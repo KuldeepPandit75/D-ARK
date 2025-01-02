@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import {useEffect ,useRef , createElement} from 'react'
 import Lobby from "./scenes/Lobby.js";
+import Arena from "./scenes/Arena.js";
 
 
 const PhaserGame = () => {
@@ -9,8 +10,8 @@ const PhaserGame = () => {
     useEffect(() => {
         const config = {
             type: Phaser.AUTO,
-            width: window.innerWidth-4,
-            height: window.innerHeight-4,
+            width: window.innerWidth,
+            height: window.innerHeight,
             backgroundColor: "#000",
             parent: gameContainer.current,
             physics: {
@@ -20,13 +21,13 @@ const PhaserGame = () => {
                     debug: false,
                 },
             },
-            scene: [Lobby]
+            scene: [Lobby,Arena]
         };
 
     const game = new Phaser.Game(config);
 
     const handleResize = () => {
-      game.scale.resize(window.innerWidth-4, window.innerHeight-4);
+      game.scale.resize(window.innerWidth, window.innerHeight);
     };
 
     window.addEventListener("resize", handleResize);
