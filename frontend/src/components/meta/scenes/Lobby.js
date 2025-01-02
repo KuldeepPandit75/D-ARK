@@ -141,8 +141,6 @@ class Lobby extends Phaser.Scene {
                 this.togglePopup(true); 
             }else if(this.distBwBP<80){
                 this.scene.start('Arena')
-            }else{
-                this.scene.start('Arena')
             }
         });
     }
